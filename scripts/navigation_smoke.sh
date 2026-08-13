@@ -13,6 +13,8 @@ set -u
 # Gazebo's Python utilities depend on Ubuntu's system site packages (for lxml).
 # Put system Python ahead of an accidentally activated virtual environment.
 export PATH="/opt/ros/humble/bin:/usr/bin:$PATH"
+tb3_gazebo_share="$(ros2 pkg prefix --share turtlebot3_gazebo)"
+export GAZEBO_MODEL_PATH="$tb3_gazebo_share/models:${GAZEBO_MODEL_PATH:-}"
 export TURTLEBOT3_MODEL=waffle
 export LIBGL_ALWAYS_SOFTWARE=1
 output_dir="${1:-/tmp/turtlebot3-navigation}"

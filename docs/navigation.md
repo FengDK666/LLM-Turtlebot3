@@ -13,6 +13,11 @@ expanded beyond its initial placeholder grid (at least 50 x 50 cells and 200
 known cells). This prevents the target being submitted off the global costmap
 on slower CI runners.
 
+The smoke script resolves `turtlebot3_gazebo` through the ROS package index and
+adds its `models/` directory to `GAZEBO_MODEL_PATH`; this ensures the
+`model://turtlebot3_world` geometry and its laser returns are available on both
+desktop and clean CI installations.
+
 ## Dependencies
 
 On Ubuntu 22.04 with ROS 2 Humble:
