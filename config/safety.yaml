@@ -1,0 +1,7 @@
+safe_multimodal_controller:
+  ros__parameters:
+    max_distance_m: 2.0
+    max_angle_deg: 360.0
+    max_linear_mps: 0.22
+    max_angular_rps: 1.5
+    watchdog_timeout_s: 0.5

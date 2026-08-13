@@ -1,0 +1,7 @@
+metric,value
+adversarial_payloads,6
+adversarial_payloads_rejected,6
+max_linear_mps,0.22
+max_angular_rps,1.5
+square_closure_error_m,0.006003554264111581
+final_speed_mps,0.0
