@@ -1,9 +1,0 @@
-keyboard
-mediapipe
-PyAudio
-pytest
-roslibpy
-setuptools
-sparkai
-websocket_client
-opencv-python
