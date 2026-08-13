@@ -5,8 +5,9 @@ keyboard, or test inputs into a strict JSON motion protocol. This upgrade keeps
 the original course-project history while replacing arbitrary Python execution,
 blocking motion loops, and hard-coded network addresses.
 
-> Current validation is software-only. This branch does not claim current
-> TurtleBot3 hardware, Gazebo, SLAM, Nav2, camera, microphone, or cloud-LLM tests.
+> Current validation is software-only. Gazebo, SLAM Toolbox, and Nav2 are tested
+> headlessly; this branch does not claim current TurtleBot3 hardware, camera,
+> microphone, gesture model, speech API, or cloud-LLM tests.
 
 ## Phase 1 scope
 
@@ -35,6 +36,36 @@ real node graph: a valid command produced 0.22 m/s on `/cmd_vel`, the emergency
 stop service succeeded, and the next observed command was zero linear and
 angular velocity.
 
+## Phase 2 navigation simulation
+
+The official TurtleBot3 Waffle Gazebo model now runs with online SLAM Toolbox
+mapping and Nav2 `NavigateToPose`. A reproducible headless evaluation records
+odometry, action outcome, path length, speed limits, recoveries, endpoint error,
+and a trajectory plot under `results/navigation/`.
+
+```bash
+scripts/navigation_smoke.sh results/navigation
+```
+
+See [the navigation evaluation](docs/navigation.md) for dependencies, launch
+arguments, interpretation, and limitations.
+
+| Representative headless run | Result |
+|---|---:|
+| Nav2 action outcome | **Succeeded** |
+| Navigation + settling duration | 8.17 s |
+| Odometry path length | 0.564 m |
+| Final position error | **0.237 m** (inside 0.25 m tolerance) |
+| Final linear speed | **0.00005 m/s** |
+| SLAM map | 111 x 102 cells at 0.05 m/cell |
+| Nav2 recoveries | 1 |
+
+![Gazebo navigation trajectory](results/navigation/navigation_trajectory.png)
+
+The table is one measured software-simulation run; small scheduling-dependent
+variation is expected. Raw odometry, metrics, the occupancy map, and the figure
+are committed under `results/navigation/`.
+
 ## Architecture
 
 ```mermaid
@@ -43,6 +74,7 @@ flowchart LR
     B --> C[Whitelist and numeric limits]
     C --> D[Non-blocking MotionExecutor]
     D --> E[ROS 2 /cmd_vel]
+    G[Gazebo / SLAM Toolbox / Nav2] --> E
     F[Watchdog / emergency-stop service] --> D
 ```
 
@@ -83,7 +115,8 @@ before using a physical robot.
 ## Current limits
 
 - No current TurtleBot3 hardware or actuator validation.
-- No Gazebo, SLAM Toolbox, Nav2, obstacle avoidance, or localization in Phase 1.
+- Gazebo, SLAM, Nav2, and obstacle avoidance are synthetic simulation only.
+- Navigation results can vary slightly with simulator and executor scheduling.
 - No camera, microphone, gesture model, speech API, or cloud LLM integration yet.
 - Open-loop duration commands do not compensate for wheel slip or odometry error.
 - The software protections are not a certified safety system.

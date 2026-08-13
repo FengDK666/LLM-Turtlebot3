@@ -2,6 +2,7 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 jobs:
@@ -30,8 +31,13 @@ jobs:
         with:
           required-ros-distributions: humble
       - run: sudo apt-get update
-      - run: sudo apt-get install -y ros-humble-geometry-msgs ros-humble-std-msgs ros-humble-std-srvs python3-colcon-common-extensions
+      - run: >-
+          sudo apt-get install -y python3-colcon-common-extensions python3-matplotlib
+          ros-humble-geometry-msgs ros-humble-std-msgs ros-humble-std-srvs
+          ros-humble-turtlebot3-gazebo ros-humble-turtlebot3-navigation2
+          ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-toolbox
       - run: colcon build
       - run: colcon test
       - run: colcon test-result --verbose
       - run: scripts/ros_smoke.sh
+      - run: scripts/navigation_smoke.sh /tmp/turtlebot3-navigation

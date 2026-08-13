@@ -6,7 +6,7 @@ package_name = "turtlebot3_multimodal"
 
 setup(
     name=package_name,
-    version="0.2.0",
+    version="0.3.0",
     packages=find_packages(exclude=("tests",)),
     data_files=[
         ("share/ament_index/resource_index/packages", [f"resource/{package_name}"]),
@@ -25,6 +25,7 @@ setup(
         "console_scripts": [
             "safe_controller = turtlebot3_multimodal.ros_node:main",
             "evaluate_commands = turtlebot3_multimodal.evaluate_cli:main",
+            "navigation_evaluator = turtlebot3_multimodal.navigation_evaluator:main",
         ],
     },
 )
