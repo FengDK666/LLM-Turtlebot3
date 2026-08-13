@@ -121,7 +121,11 @@ class NavigationEvaluator(Node):
             rclpy.spin_once(self, timeout_sec=0.2)
             if (
                 len(self.samples) < 5
-                or self.map_known_cells == 0
+                # SLAM Toolbox first publishes a tiny placeholder grid. Wait
+                # for a useful map so the fixed goal is on the global costmap.
+                or self.map_width < 50
+                or self.map_height < 50
+                or self.map_known_cells < 200
                 or not self._lifecycle.wait_for_service(timeout_sec=0.0)
             ):
                 continue

@@ -8,6 +8,11 @@ map, summary metrics, and a trajectory figure. After Nav2 reports success, it
 records two additional seconds so the endpoint speed reflects settling rather
 than the success callback.
 
+The goal is sent only after Nav2 is active, odometry is flowing, and SLAM has
+expanded beyond its initial placeholder grid (at least 50 x 50 cells and 200
+known cells). This prevents the target being submitted off the global costmap
+on slower CI runners.
+
 ## Dependencies
 
 On Ubuntu 22.04 with ROS 2 Humble:
