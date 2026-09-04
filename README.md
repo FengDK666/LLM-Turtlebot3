@@ -1,5 +1,14 @@
 # Safe Multimodal TurtleBot3
 
+## Project timeline and provenance
+
+| Milestone | Date | Scope |
+|---|---|---|
+| Original course-project context | Nov 2024 | TurtleBot3/ROS 2 coursework covering robot commands, model setup, and sensor-data processing. |
+| Independent safety-focused reconstruction and extension | Aug 2026 | Rebuilt and extended the public repository with a constrained command protocol, safety controls, tests, and software-only Gazebo/Nav2 validation. |
+
+These dates distinguish the original coursework from the later public portfolio build; the GitHub repository update date refers to the independent reconstruction and extension.
+
 A ROS 2 Humble command layer for TurtleBot3 that converts gesture, voice, LLM,
 keyboard, or test inputs into a strict JSON motion protocol. This upgrade keeps
 the original course-project history while replacing arbitrary Python execution,
