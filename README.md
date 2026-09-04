@@ -4,19 +4,22 @@
 
 | Milestone | Date | Scope |
 |---|---|---|
-| Original course-project context | Nov 2024 | TurtleBot3/ROS 2 coursework covering robot commands, model setup, and sensor-data processing. |
-| Independent safety-focused reconstruction and extension | Aug 2026 | Rebuilt and extended the public repository with a constrained command protocol, safety controls, tests, and software-only Gazebo/Nav2 validation. |
+| Coursework experience | Nov 2024 | I completed TurtleBot3/ROS 2 coursework covering robot commands, model setup, and sensor-data processing. |
+| Public implementation and extension | Aug 2026 | I independently rewrote and expanded the project with a constrained command protocol, safety controls, tests, and Gazebo/Nav2 validation. |
 
-These dates distinguish the original coursework from the later public portfolio build; the GitHub repository update date refers to the independent reconstruction and extension.
+The repository builds on my dated coursework while making the later engineering work explicit; all public code, tests, and validation artifacts were prepared for this release.
 
 A ROS 2 Humble command layer for TurtleBot3 that converts gesture, voice, LLM,
 keyboard, or test inputs into a strict JSON motion protocol. This upgrade keeps
 the original course-project history while replacing arbitrary Python execution,
 blocking motion loops, and hard-coded network addresses.
 
-> Current validation is software-only. Gazebo, SLAM Toolbox, and Nav2 are tested
-> headlessly; this branch does not claim current TurtleBot3 hardware, camera,
-> microphone, gesture model, speech API, or cloud-LLM tests.
+> **My contribution and validation boundary:** I implemented the strict JSON
+> protocol, validation, non-blocking motion state machine, watchdog, emergency
+> stop, tests, and Gazebo/Nav2 evaluation in the public version. These components
+> are validated in software; current physical TurtleBot3, camera, microphone,
+> gesture-model, speech-API, and cloud-LLM testing are outside the documented
+> scope.
 
 ## Phase 1 scope
 
